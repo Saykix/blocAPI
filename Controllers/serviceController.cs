@@ -11,11 +11,6 @@ namespace BlockAPI.ServiceController
     [ApiController]
     public class ServiceController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        public ServiceController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
 
         [HttpGet]
         public String Get()
@@ -80,7 +75,7 @@ namespace BlockAPI.ServiceController
             conn.Open();
             MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-            cmd.Parameters.AddWithValue("@ville", service.nomService);
+            cmd.Parameters.AddWithValue("@nomService", service.nomService);
 
 
             myReader = cmd.ExecuteReader();
@@ -127,7 +122,7 @@ namespace BlockAPI.ServiceController
             conn.Open();
             MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-            cmd.Parameters.AddWithValue("@ville", service.nomService);
+            cmd.Parameters.AddWithValue("@nomService", service.nomService);
             cmd.Parameters.AddWithValue("@Id", id);
 
             myReader = cmd.ExecuteReader();

@@ -11,11 +11,6 @@ namespace BlockAPI.EmployerController
     [ApiController]
     public class EmployerController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        public EmployerController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
 
         [HttpGet]
         public String Get()

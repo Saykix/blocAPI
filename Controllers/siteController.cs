@@ -11,11 +11,6 @@ namespace BlockAPI.SiteController
     [ApiController]
     public class SiteController : ControllerBase
     {
-        private readonly IConfiguration _configuration;
-        public SiteController(IConfiguration configuration)
-        {
-            _configuration = configuration;
-        }
 
         [HttpGet]
         public String Get()
