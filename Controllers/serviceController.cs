@@ -63,6 +63,31 @@ namespace BlockAPI.ServiceController
             return json;
         }
 
+        [HttpGet("service/{nomService}")]
+        public String GetByVille(string nomService)
+        {
+            string sql = "SELECT * FROM service WHERE nomService = @nomService";
+
+            DataTable table = new DataTable();
+            MySqlDataReader myReader;
+            MySqlConnection conn = DBConnect.GetDBConnection();
+
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            cmd.Parameters.AddWithValue("@nomService", nomService);
+
+            myReader = cmd.ExecuteReader();
+            table.Load(myReader);
+
+            myReader.Close();
+            conn.Close();
+
+            string json = JsonConvert.SerializeObject(table, Formatting.Indented);
+
+            return json;
+        }
+
         [HttpPost]
         public JsonResult Post(Service service)
         {

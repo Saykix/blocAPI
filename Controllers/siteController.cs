@@ -63,6 +63,31 @@ namespace BlockAPI.SiteController
             return json;
         }
 
+        [HttpGet("site/{ville}")]
+        public String GetById(string ville)
+        {
+            string sql = "SELECT * FROM site WHERE ville = @ville";
+
+            DataTable table = new DataTable();
+            MySqlDataReader myReader;
+            MySqlConnection conn = DBConnect.GetDBConnection();
+
+            conn.Open();
+            MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+            cmd.Parameters.AddWithValue("@ville", ville);
+
+            myReader = cmd.ExecuteReader();
+            table.Load(myReader);
+
+            myReader.Close();
+            conn.Close();
+
+            string json = JsonConvert.SerializeObject(table, Formatting.Indented);
+
+            return json;
+        }
+
         [HttpPost]
         public JsonResult Post(Site site)
         {
